@@ -8,19 +8,17 @@ using System.Threading.Tasks;
 
 namespace keyboard_typing_calc {
     class Texts {
-        public const string RUS_LANG = "RUS";
-        public const string ENG_LANG = "ENG";
-
         string currentTxt;
         public string CurrentTxt => currentTxt;
 
+        public string Inputed { get; set; }
+
         public void SetCurrentTxt(string language) {
-            var stringsHolder = (language == RUS_LANG) ? textsRus : textsEng;
+            var stringsHolder = (language == Languages.RUS) ? textsRus : textsEng;
             var rnd = new Random();
             int index = rnd.Next(stringsHolder.Count);
             currentTxt = stringsHolder[index];
         }
-
 
         List<string> textsRus;
         List<string> textsEng;
@@ -35,21 +33,12 @@ namespace keyboard_typing_calc {
         }
 
         public Texts() {
-            ////var fileNames = new string[] { "RUS", "ENG" };
-            ////foreach (var fileName in fileNames) {
-            //using (var streamReader = new StreamReader("rus.json")) {
-            //    string jsonFromLoadedFile = streamReader.ReadToEnd();
-            //    textsRus = JsonConvert.DeserializeObject<List<string>>(jsonFromLoadedFile);
-            //}
-            ////}
-            //using (var streamReader = new StreamReader("eng.json")) {
-            //    string jsonFromLoadedFile = streamReader.ReadToEnd();
-            //    textsRus = JsonConvert.DeserializeObject<List<string>>(jsonFromLoadedFile);
-            //}
-
-            textsRus = LoadJson(RUS_LANG);
-            textsEng = LoadJson(ENG_LANG);
+            textsRus = LoadJson(Languages.RUS);
+            textsEng = LoadJson(Languages.ENG);
         }
 
+        public bool IsInputWithoutErrors() {
+            return Inputed == CurrentTxt;
+        }
     }
 }

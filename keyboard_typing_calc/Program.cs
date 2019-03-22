@@ -8,20 +8,26 @@ namespace keyboard_typing_calc {
     class Program {
         static void Main(string[] args) {
             var texts = new Texts();
-            string stayInProg = "Y";
-            do {           
-                string language = "";
-                do {
-                    Console.WriteLine("Введите желаемый язык текстов: RUS или ENG");
-                    language = Console.ReadLine().ToUpper();
-                } while (language != Texts.RUS_LANG && language != Texts.ENG_LANG);
+            var clm=new CommandLineMenu();
+            var stats = new Statistics();
 
-                texts.SetCurrentTxt(language);
+            do {
+                string lang= clm.GetSelectedLanguage();
+                texts.SetCurrentTxt(lang);
                 Console.WriteLine( texts.CurrentTxt);
 
-                Console.WriteLine("Продолжить?: Y/N.");
-                stayInProg = Console.ReadLine().ToUpper();
-            } while (stayInProg != "N");
+                DateTime startTyping = new DateTime();
+                texts.Inputed = Console.ReadLine();
+                DateTime endTyping = new DateTime();
+
+                if (texts.IsInputWithoutErrors()) {
+                    stats.TimeWork(endTyping - startTyping, texts.Inputed);
+                }
+                else {
+                    Console.WriteLine("����� ������ � �������!");
+                }
+
+            } while (!clm.StayInProg());
         }
     }
 }
