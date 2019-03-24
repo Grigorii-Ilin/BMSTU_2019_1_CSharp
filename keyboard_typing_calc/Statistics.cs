@@ -16,23 +16,36 @@ namespace keyboard_typing_calc {
         double bestTime { get; set; }
 
         public Statistics() {
-            wordsPerMinute=new List<double>();
+            wordsPerMinute = new List<double>();
 
             if (File.Exists(STATS_FILE_NAME)) {
                 using (var streamReader = new StreamReader(STATS_FILE_NAME)) {
                     string jsonFromLoadedFile = streamReader.ReadToEnd();
-                    wordsPerMinute= JsonConvert.DeserializeObject<List<double>>(jsonFromLoadedFile);
+                    wordsPerMinute = JsonConvert.DeserializeObject<List<double>>(jsonFromLoadedFile);
                 }
             }
         }
 
         public void TimeWork(TimeSpan dtSec, string curTxt) {
-            wordPerMinute = curTxt.Length / dtSec.Seconds / 60;
+            wordPerMinute = curTxt.Length / dtSec.TotalMinutes;
             wordsPerMinute.Add(wordPerMinute);
 
             meanTime = wordsPerMinute.Sum() / wordsPerMinute.Count;
 
             bestTime = wordsPerMinute.Max();
+        }
+
+        public void ShowResults() {
+            Console.WriteLine("Набрано символов в минуту:");
+            Console.WriteLine("Сейчас: {0,3:F}; средний результат: {1,3:F}; лучший результат: {2,3:F}",
+                            wordPerMinute,
+                            meanTime,
+                            bestTime);
+        }
+
+        public void Save() {
+            string json = JsonConvert.SerializeObject(wordsPerMinute, Formatting.Indented);
+            System.IO.File.WriteAllText(STATS_FILE_NAME, json);
         }
     }
 }

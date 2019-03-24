@@ -14,31 +14,19 @@ namespace keyboard_typing_calc {
         public string Inputed { get; set; }
 
         public void SetCurrentTxt(string language) {
-            var stringsHolder = (language == Languages.RUS) ? textsRus : textsEng;
             var rnd = new Random();
-            int index = rnd.Next(stringsHolder.Count);
-            currentTxt = stringsHolder[index];
+            int index = rnd.Next(texts[language].Count);
+            currentTxt = texts[language][index].Trim();
         }
 
-        List<string> textsRus;
-        List<string> textsEng;
+        Dictionary<string, List<string>> texts;
 
-        private List<string> LoadJson(string fileName) {
-            //texts are from https://lim-english.com/posts/prostie-teksti-na-angliiskom-dlya-nachinaushih/
-
-            using (var streamReader = new StreamReader(fileName + ".json")) {
-                string jsonFromLoadedFile = streamReader.ReadToEnd();
-                return JsonConvert.DeserializeObject<List<string>>(jsonFromLoadedFile);
-            }
-        }
-
-        public Texts() {
-            textsRus = LoadJson(Languages.RUS);
-            textsEng = LoadJson(Languages.ENG);
+        public Texts(Dictionary<string, List<string>> texts) {
+            this.texts = texts;
         }
 
         public bool IsInputWithoutErrors() {
-            return Inputed == CurrentTxt;
+            return Inputed.Trim() == CurrentTxt;
         }
     }
 }

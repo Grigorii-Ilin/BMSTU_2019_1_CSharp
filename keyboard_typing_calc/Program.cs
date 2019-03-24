@@ -7,27 +7,30 @@ using System.Threading.Tasks;
 namespace keyboard_typing_calc {
     class Program {
         static void Main(string[] args) {
-            var texts = new Texts();
-            var clm=new CommandLineMenu();
+            var textsDict = new TextsStorage().LoadTexts();
+            var texts = new Texts(textsDict);
+            //var clm=new CommandLineMenu();
             var stats = new Statistics();
 
             do {
-                string lang= clm.GetSelectedLanguage();
+                string lang= CommandLineMenu.SelectLanguage();
                 texts.SetCurrentTxt(lang);
-                Console.WriteLine( texts.CurrentTxt);
 
-                DateTime startTyping = new DateTime();
+                Console.WriteLine(texts.CurrentTxt);
+                DateTime startTyping = DateTime.Now;
                 texts.Inputed = Console.ReadLine();
-                DateTime endTyping = new DateTime();
+                DateTime endTyping = DateTime.Now;
 
                 if (texts.IsInputWithoutErrors()) {
                     stats.TimeWork(endTyping - startTyping, texts.Inputed);
+                    stats.ShowResults();
                 }
                 else {
                     Console.WriteLine("Текст введен с ошибкой!");
                 }
 
-            } while (!clm.StayInProg());
+            } while (CommandLineMenu.StayInProg());
+            stats.Save();
         }
     }
 }
