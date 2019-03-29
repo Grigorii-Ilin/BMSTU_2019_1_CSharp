@@ -31,6 +31,7 @@
             this.rbOnlyUnended = new System.Windows.Forms.RadioButton();
             this.rbShowAll = new System.Windows.Forms.RadioButton();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.rbBeforeDate = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvScheduleViewer)).BeginInit();
             this.paEndedAndNotEndedFilter.SuspendLayout();
             this.SuspendLayout();
@@ -45,6 +46,7 @@
             // 
             // paEndedAndNotEndedFilter
             // 
+            this.paEndedAndNotEndedFilter.Controls.Add(this.rbBeforeDate);
             this.paEndedAndNotEndedFilter.Controls.Add(this.rbWithoutTime);
             this.paEndedAndNotEndedFilter.Controls.Add(this.rbOnlyWithTime);
             this.paEndedAndNotEndedFilter.Controls.Add(this.rbOnlyEnded);
@@ -52,7 +54,7 @@
             this.paEndedAndNotEndedFilter.Controls.Add(this.rbShowAll);
             this.paEndedAndNotEndedFilter.Location = new System.Drawing.Point(38, 303);
             this.paEndedAndNotEndedFilter.Name = "paEndedAndNotEndedFilter";
-            this.paEndedAndNotEndedFilter.Size = new System.Drawing.Size(202, 135);
+            this.paEndedAndNotEndedFilter.Size = new System.Drawing.Size(202, 153);
             this.paEndedAndNotEndedFilter.TabIndex = 1;
             // 
             // rbWithoutTime
@@ -62,7 +64,6 @@
             this.rbWithoutTime.Name = "rbWithoutTime";
             this.rbWithoutTime.Size = new System.Drawing.Size(115, 17);
             this.rbWithoutTime.TabIndex = 4;
-            this.rbWithoutTime.TabStop = true;
             this.rbWithoutTime.Text = "Задачи без срока";
             this.rbWithoutTime.UseVisualStyleBackColor = true;
             // 
@@ -73,7 +74,6 @@
             this.rbOnlyWithTime.Name = "rbOnlyWithTime";
             this.rbOnlyWithTime.Size = new System.Drawing.Size(118, 17);
             this.rbOnlyWithTime.TabIndex = 3;
-            this.rbOnlyWithTime.TabStop = true;
             this.rbOnlyWithTime.Text = "Только со сроком";
             this.rbOnlyWithTime.UseVisualStyleBackColor = true;
             // 
@@ -84,7 +84,6 @@
             this.rbOnlyEnded.Name = "rbOnlyEnded";
             this.rbOnlyEnded.Size = new System.Drawing.Size(135, 17);
             this.rbOnlyEnded.TabIndex = 2;
-            this.rbOnlyEnded.TabStop = true;
             this.rbOnlyEnded.Text = "Только завершенные";
             this.rbOnlyEnded.UseVisualStyleBackColor = true;
             // 
@@ -95,13 +94,13 @@
             this.rbOnlyUnended.Name = "rbOnlyUnended";
             this.rbOnlyUnended.Size = new System.Drawing.Size(147, 17);
             this.rbOnlyUnended.TabIndex = 1;
-            this.rbOnlyUnended.TabStop = true;
             this.rbOnlyUnended.Text = "Только незавершенные";
             this.rbOnlyUnended.UseVisualStyleBackColor = true;
             // 
             // rbShowAll
             // 
             this.rbShowAll.AutoSize = true;
+            this.rbShowAll.Checked = true;
             this.rbShowAll.Location = new System.Drawing.Point(14, 16);
             this.rbShowAll.Name = "rbShowAll";
             this.rbShowAll.Size = new System.Drawing.Size(109, 17);
@@ -116,11 +115,21 @@
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 2;
             // 
+            // rbBeforeDate
+            // 
+            this.rbBeforeDate.AutoSize = true;
+            this.rbBeforeDate.Location = new System.Drawing.Point(14, 130);
+            this.rbBeforeDate.Name = "rbBeforeDate";
+            this.rbBeforeDate.Size = new System.Drawing.Size(104, 17);
+            this.rbBeforeDate.TabIndex = 5;
+            this.rbBeforeDate.Text = "Задачи до даты";
+            this.rbBeforeDate.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(799, 462);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.paEndedAndNotEndedFilter);
             this.Controls.Add(this.dgvScheduleViewer);
@@ -144,6 +153,7 @@
         private System.Windows.Forms.RadioButton rbWithoutTime;
         private System.Windows.Forms.RadioButton rbOnlyWithTime;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.RadioButton rbBeforeDate;
     }
 }
 
