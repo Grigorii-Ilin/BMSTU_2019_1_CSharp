@@ -9,22 +9,12 @@ namespace work_scheduler {
         public int Id { get; set; }
         public string Work { get; set; }
         public DateTime Strart { get; set; }
-        //private bool IsControlDate;
         public DateTime? ControlDate { get; set; } = null;
         public DateTime? Ended { get; set; } = null;
 
-        public ToDoItem(string work, string controlDate=""){//(int id, string work, DateTime start, DateTime end) {
-            //Id = id;
+        public ToDoItem(string work, string controlDate=""){
             Work = work;
-            Strart = DateTime.Now;//start;
-            //IsControlDate = false;
-            //End = end;
+            Strart = DateTime.Now;
         }
-        //public ToDoItem(string work, string controlDate) {
-        //    Work = work;
-        //    Strart = DateTime.Now;
-        //    //IsControlDate = true;
-        //    ControlDate(controlDate);
-        //}
     }
 }

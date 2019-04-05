@@ -15,27 +15,66 @@ namespace work_scheduler {
         }
 
         private ToDoWorking toDoWorking;
-
-        //private void ShowOnGrid(List<ToDoItem> toDoItems) {
-        //    dgvScheduleViewer.DataSource= dgvScheduleViewer.getnew
-        //}
+        //FilterType filterType= FilterType.ShowAll;
+        //SortingType sortingType=SortingType.WithoutSorting;
 
         private void Form1_Load(object sender, EventArgs e) {
-            //dgvScheduleViewer.Columns.Add("Id", "Номер");
-            //dgvScheduleViewer.Columns.Add("Work", "Задание");
-            //dgvScheduleViewer.Columns.Add("Start", "Начато");
-            //dgvScheduleViewer.Columns.Add("End", "Окончено");
-
-            //dgvScheduleViewer.Columns.Add(nameof(ToDoItem.Id), "Идентификатор");
-            //dgvScheduleViewer.Columns.Add(nameof(ToDoItem.Work), "Задание");
-            //dgvScheduleViewer.Columns.Add(nameof(ToDoItem.Strart), "Начато");
-            //dgvScheduleViewer.Columns.Add(nameof(ToDoItem.ControlDate), "Контрольный срок");
-            //dgvScheduleViewer.Columns.Add(nameof(ToDoItem.Ended), "Окончено");
-
             toDoWorking = new ToDoWorking();
+            dgvScheduleViewer.DataSource = toDoWorking.Show();
+        }
 
-            dgvScheduleViewer.DataSource = toDoWorking.ShowAll();
+        //private int GetTagOfCheckedRadioButton(Panel panel) {
+        //    int result = -1;
+        //    foreach (var control in paFilter.Controls) {
+        //        if (control.GetType()==typeof(RadioButton)) {
+        //            var rbControl = (RadioButton)control;
+        //            if (rbControl.Checked) {
+        //                result = (int)rbControl.Tag;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //    return result;
+        //}
 
+        private void btShow_Click(object sender, EventArgs e) {
+            //FilterType filterType = GetTagOfCheckedRadioButton(paFilter);
+        }
+
+        private void rbShowAll_CheckedChanged(object sender, EventArgs e) {
+            toDoWorking.filterType = FilterType.ShowAll;
+        }
+
+        private void rbOnlyUnended_CheckedChanged(object sender, EventArgs e) {
+            toDoWorking.filterType = FilterType.OnlyUnended;
+        }
+
+        private void rbOnlyEnded_CheckedChanged(object sender, EventArgs e) {
+            toDoWorking.filterType = FilterType.OnlyEnded;
+        }
+
+        private void rbOnlyWithTime_CheckedChanged(object sender, EventArgs e) {
+            toDoWorking.filterType = FilterType.OnlyWithTime;
+        }
+
+        private void rbWithoutTime_CheckedChanged(object sender, EventArgs e) {
+            toDoWorking.filterType = FilterType.WithoutTime;
+        }
+
+        private void rbBeforeDate_CheckedChanged(object sender, EventArgs e) {
+            toDoWorking.filterType = FilterType.BeforeDate;
+        }
+
+        private void rbWithoutSorting_CheckedChanged(object sender, EventArgs e) {
+            toDoWorking.sortingType = SortingType.WithoutSorting;
+        }
+
+        private void rbAlphabetSorting_CheckedChanged(object sender, EventArgs e) {
+            toDoWorking.sortingType = SortingType.AlphabetSorting;
+        }
+
+        private void rbControlDateSorting_CheckedChanged(object sender, EventArgs e) {
+            toDoWorking.sortingType = SortingType.ControlDateSorting;
         }
     }
 } 
