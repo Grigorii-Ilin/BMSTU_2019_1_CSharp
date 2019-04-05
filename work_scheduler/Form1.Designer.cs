@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.dgvScheduleViewer = new System.Windows.Forms.DataGridView();
             this.paFilter = new System.Windows.Forms.Panel();
             this.rbBeforeDate = new System.Windows.Forms.RadioButton();
@@ -31,15 +32,21 @@
             this.rbOnlyEnded = new System.Windows.Forms.RadioButton();
             this.rbOnlyUnended = new System.Windows.Forms.RadioButton();
             this.rbShowAll = new System.Windows.Forms.RadioButton();
-            this.mcCalendar = new System.Windows.Forms.MonthCalendar();
             this.paSorting = new System.Windows.Forms.Panel();
             this.rbControlDateSorting = new System.Windows.Forms.RadioButton();
             this.rbAlphabetSorting = new System.Windows.Forms.RadioButton();
             this.rbWithoutSorting = new System.Windows.Forms.RadioButton();
             this.btShow = new System.Windows.Forms.Button();
+            this.dtpDateSelector = new System.Windows.Forms.DateTimePicker();
+            this.toDoItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.toDoWorkingBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.toDoWorkingBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvScheduleViewer)).BeginInit();
             this.paFilter.SuspendLayout();
             this.paSorting.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.toDoItemBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toDoWorkingBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toDoWorkingBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvScheduleViewer
@@ -137,12 +144,6 @@
             this.rbShowAll.UseVisualStyleBackColor = true;
             this.rbShowAll.CheckedChanged += new System.EventHandler(this.rbShowAll_CheckedChanged);
             // 
-            // mcCalendar
-            // 
-            this.mcCalendar.Location = new System.Drawing.Point(417, 294);
-            this.mcCalendar.Name = "mcCalendar";
-            this.mcCalendar.TabIndex = 2;
-            // 
             // paSorting
             // 
             this.paSorting.Controls.Add(this.rbControlDateSorting);
@@ -201,14 +202,34 @@
             this.btShow.UseVisualStyleBackColor = true;
             this.btShow.Click += new System.EventHandler(this.btShow_Click);
             // 
+            // dtpDateSelector
+            // 
+            this.dtpDateSelector.Location = new System.Drawing.Point(411, 306);
+            this.dtpDateSelector.Name = "dtpDateSelector";
+            this.dtpDateSelector.Size = new System.Drawing.Size(200, 20);
+            this.dtpDateSelector.TabIndex = 5;
+            this.dtpDateSelector.Enter += new System.EventHandler(this.dtpDateSelector_Enter);
+            // 
+            // toDoItemBindingSource
+            // 
+            this.toDoItemBindingSource.DataSource = typeof(work_scheduler.ToDoItem);
+            // 
+            // toDoWorkingBindingSource
+            // 
+            this.toDoWorkingBindingSource.DataSource = typeof(work_scheduler.ToDoWorking);
+            // 
+            // toDoWorkingBindingSource1
+            // 
+            this.toDoWorkingBindingSource1.DataSource = typeof(work_scheduler.ToDoWorking);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 462);
+            this.Controls.Add(this.dtpDateSelector);
             this.Controls.Add(this.btShow);
             this.Controls.Add(this.paSorting);
-            this.Controls.Add(this.mcCalendar);
             this.Controls.Add(this.paFilter);
             this.Controls.Add(this.dgvScheduleViewer);
             this.Name = "Form1";
@@ -219,6 +240,9 @@
             this.paFilter.PerformLayout();
             this.paSorting.ResumeLayout(false);
             this.paSorting.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.toDoItemBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toDoWorkingBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toDoWorkingBindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -232,13 +256,16 @@
         private System.Windows.Forms.RadioButton rbShowAll;
         private System.Windows.Forms.RadioButton rbWithoutTime;
         private System.Windows.Forms.RadioButton rbOnlyWithTime;
-        private System.Windows.Forms.MonthCalendar mcCalendar;
         private System.Windows.Forms.RadioButton rbBeforeDate;
         private System.Windows.Forms.Panel paSorting;
         private System.Windows.Forms.RadioButton rbControlDateSorting;
         private System.Windows.Forms.RadioButton rbAlphabetSorting;
         private System.Windows.Forms.RadioButton rbWithoutSorting;
         private System.Windows.Forms.Button btShow;
+        private System.Windows.Forms.DateTimePicker dtpDateSelector;
+        private System.Windows.Forms.BindingSource toDoItemBindingSource;
+        private System.Windows.Forms.BindingSource toDoWorkingBindingSource;
+        private System.Windows.Forms.BindingSource toDoWorkingBindingSource1;
     }
 }
 

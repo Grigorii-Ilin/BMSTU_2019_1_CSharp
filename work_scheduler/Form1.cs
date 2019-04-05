@@ -15,54 +15,45 @@ namespace work_scheduler {
         }
 
         private ToDoWorking toDoWorking;
-        //FilterType filterType= FilterType.ShowAll;
-        //SortingType sortingType=SortingType.WithoutSorting;
 
         private void Form1_Load(object sender, EventArgs e) {
             toDoWorking = new ToDoWorking();
-            dgvScheduleViewer.DataSource = toDoWorking.Show();
+            dgvScheduleViewer.DataSource = toDoWorking.ToDoItemsForDGV;
+            toDoWorking.Show();
         }
 
-        //private int GetTagOfCheckedRadioButton(Panel panel) {
-        //    int result = -1;
-        //    foreach (var control in paFilter.Controls) {
-        //        if (control.GetType()==typeof(RadioButton)) {
-        //            var rbControl = (RadioButton)control;
-        //            if (rbControl.Checked) {
-        //                result = (int)rbControl.Tag;
-        //                break;
-        //            }
-        //        }
-        //    }
-        //    return result;
-        //}
-
         private void btShow_Click(object sender, EventArgs e) {
-            //FilterType filterType = GetTagOfCheckedRadioButton(paFilter);
+            MessageBox.Show(toDoWorking.ToDoItemsForDGV[0].Ended.Value.ToLongDateString());
         }
 
         private void rbShowAll_CheckedChanged(object sender, EventArgs e) {
             toDoWorking.filterType = FilterType.ShowAll;
+            toDoWorking.Show();
         }
 
         private void rbOnlyUnended_CheckedChanged(object sender, EventArgs e) {
             toDoWorking.filterType = FilterType.OnlyUnended;
+            toDoWorking.Show();
         }
 
         private void rbOnlyEnded_CheckedChanged(object sender, EventArgs e) {
             toDoWorking.filterType = FilterType.OnlyEnded;
+            toDoWorking.Show();
         }
 
         private void rbOnlyWithTime_CheckedChanged(object sender, EventArgs e) {
             toDoWorking.filterType = FilterType.OnlyWithTime;
+            toDoWorking.Show();
         }
 
         private void rbWithoutTime_CheckedChanged(object sender, EventArgs e) {
             toDoWorking.filterType = FilterType.WithoutTime;
+            toDoWorking.Show();
         }
 
         private void rbBeforeDate_CheckedChanged(object sender, EventArgs e) {
             toDoWorking.filterType = FilterType.BeforeDate;
+            toDoWorking.Show(dtpDateSelector.Value);
         }
 
         private void rbWithoutSorting_CheckedChanged(object sender, EventArgs e) {
@@ -71,10 +62,18 @@ namespace work_scheduler {
 
         private void rbAlphabetSorting_CheckedChanged(object sender, EventArgs e) {
             toDoWorking.sortingType = SortingType.AlphabetSorting;
+            dgvScheduleViewer.Sort(dgvScheduleViewer.Columns[1], ListSortDirection.Ascending);
         }
 
         private void rbControlDateSorting_CheckedChanged(object sender, EventArgs e) {
             toDoWorking.sortingType = SortingType.ControlDateSorting;
+        }
+
+
+        private void dtpDateSelector_Enter(object sender, EventArgs e) {
+            if (dgvScheduleViewer.SelectedCells[0].ColumnIndex>=2) {
+                dgvScheduleViewer.CurrentCell.Value = dtpDateSelector.Value.ToLongDateString();
+            }
         }
     }
 } 
