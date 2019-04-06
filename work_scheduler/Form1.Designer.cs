@@ -36,7 +36,7 @@
             this.rbControlDateSorting = new System.Windows.Forms.RadioButton();
             this.rbAlphabetSorting = new System.Windows.Forms.RadioButton();
             this.rbWithoutSorting = new System.Windows.Forms.RadioButton();
-            this.btShow = new System.Windows.Forms.Button();
+            this.btSave = new System.Windows.Forms.Button();
             this.dtpDateSelector = new System.Windows.Forms.DateTimePicker();
             this.toDoItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toDoWorkingBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -192,19 +192,19 @@
             this.rbWithoutSorting.UseVisualStyleBackColor = true;
             this.rbWithoutSorting.CheckedChanged += new System.EventHandler(this.rbWithoutSorting_CheckedChanged);
             // 
-            // btShow
+            // btSave
             // 
-            this.btShow.Location = new System.Drawing.Point(652, 303);
-            this.btShow.Name = "btShow";
-            this.btShow.Size = new System.Drawing.Size(118, 23);
-            this.btShow.TabIndex = 4;
-            this.btShow.Text = "Показать задачи";
-            this.btShow.UseVisualStyleBackColor = true;
-            this.btShow.Click += new System.EventHandler(this.btShow_Click);
+            this.btSave.Location = new System.Drawing.Point(428, 359);
+            this.btSave.Name = "btSave";
+            this.btSave.Size = new System.Drawing.Size(118, 23);
+            this.btSave.TabIndex = 4;
+            this.btSave.Text = "Сохранить";
+            this.btSave.UseVisualStyleBackColor = true;
+            this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
             // dtpDateSelector
             // 
-            this.dtpDateSelector.Location = new System.Drawing.Point(411, 306);
+            this.dtpDateSelector.Location = new System.Drawing.Point(411, 315);
             this.dtpDateSelector.Name = "dtpDateSelector";
             this.dtpDateSelector.Size = new System.Drawing.Size(200, 20);
             this.dtpDateSelector.TabIndex = 5;
@@ -228,7 +228,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 462);
             this.Controls.Add(this.dtpDateSelector);
-            this.Controls.Add(this.btShow);
+            this.Controls.Add(this.btSave);
             this.Controls.Add(this.paSorting);
             this.Controls.Add(this.paFilter);
             this.Controls.Add(this.dgvScheduleViewer);
@@ -261,7 +261,7 @@
         private System.Windows.Forms.RadioButton rbControlDateSorting;
         private System.Windows.Forms.RadioButton rbAlphabetSorting;
         private System.Windows.Forms.RadioButton rbWithoutSorting;
-        private System.Windows.Forms.Button btShow;
+        private System.Windows.Forms.Button btSave;
         private System.Windows.Forms.DateTimePicker dtpDateSelector;
         private System.Windows.Forms.BindingSource toDoItemBindingSource;
         private System.Windows.Forms.BindingSource toDoWorkingBindingSource;

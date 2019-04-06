@@ -22,5 +22,7 @@ namespace work_scheduler {
                 this.ControlDate = dtForParse;
             }
         }
+
+        public ToDoItem() { }
     }
 }

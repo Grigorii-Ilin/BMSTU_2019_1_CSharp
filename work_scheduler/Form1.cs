@@ -18,12 +18,14 @@ namespace work_scheduler {
 
         private void Form1_Load(object sender, EventArgs e) {
             toDoWorking = new ToDoWorking();
+            toDoWorking.Load();
             dgvScheduleViewer.DataSource = toDoWorking.ToDoItemsForDGV;
             toDoWorking.Show();
         }
 
-        private void btShow_Click(object sender, EventArgs e) {
-            MessageBox.Show(toDoWorking.ToDoItemsForDGV[0].Ended.Value.ToLongDateString());
+        private void btSave_Click(object sender, EventArgs e) {
+            toDoWorking.Save();
+            MessageBox.Show("Данные сохранены");
         }
 
         private void rbShowAll_CheckedChanged(object sender, EventArgs e) {
@@ -58,15 +60,17 @@ namespace work_scheduler {
 
         private void rbWithoutSorting_CheckedChanged(object sender, EventArgs e) {
             toDoWorking.sortingType = SortingType.WithoutSorting;
+            toDoWorking.Show();
         }
 
         private void rbAlphabetSorting_CheckedChanged(object sender, EventArgs e) {
             toDoWorking.sortingType = SortingType.AlphabetSorting;
-            dgvScheduleViewer.Sort(dgvScheduleViewer.Columns[1], ListSortDirection.Ascending);
+            toDoWorking.Show();
         }
 
         private void rbControlDateSorting_CheckedChanged(object sender, EventArgs e) {
             toDoWorking.sortingType = SortingType.ControlDateSorting;
+            toDoWorking.Show();
         }
 
 
