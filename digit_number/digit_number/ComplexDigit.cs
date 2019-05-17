@@ -12,14 +12,14 @@ namespace digit_number {
             this.imagine = im;
         }
 
-        public static ComplexDigit operator + (ComplexDigit lhs, ComplexDigit rhs) {
+        public static ComplexDigit operator +(ComplexDigit lhs, ComplexDigit rhs) {
             double r = lhs.real + rhs.real;
-            double im= lhs.imagine + rhs.imagine;
+            double im = lhs.imagine + rhs.imagine;
 
             return new ComplexDigit(r, im);
         }
 
-        public static ComplexDigit operator - (ComplexDigit lhs, ComplexDigit rhs) {
+        public static ComplexDigit operator -(ComplexDigit lhs, ComplexDigit rhs) {
             double r = lhs.real - rhs.real;
             double im = lhs.imagine - rhs.imagine;
 
@@ -34,29 +34,25 @@ namespace digit_number {
         }
 
         public static ComplexDigit operator /(ComplexDigit lhs, ComplexDigit rhs) {
-            double r = lhs.real / rhs.real;
-            double im = lhs.imagine / rhs.imagine;
+            double r = (rhs.real != 0 ? lhs.real / rhs.real : 0);
+            double im = (rhs.imagine != 0 ? lhs.imagine / rhs.imagine : 0);
 
             return new ComplexDigit(r, im);
         }
 
-        public static bool operator == (ComplexDigit lhs, ComplexDigit rhs) {
+        public static bool operator ==(ComplexDigit lhs, ComplexDigit rhs) {
             bool br = lhs.real == rhs.real;
             bool bim = lhs.imagine == rhs.imagine;
 
-            return (br== true && bim==true);
+            return (br == true && bim == true);
         }
 
         public static bool operator !=(ComplexDigit lhs, ComplexDigit rhs) {
-            //bool br = lhs.real == rhs.real;
-            //bool bim = lhs.imagine == rhs.imagine;
-
-            //return (br != true || bim != true);
             return !(lhs == rhs);
         }
 
-        public string print() {
-            return "Целая часть: {real} Мнимая часть: {imagine}";
+        public string str() {
+            return String.Format("Целая часть: {0} Мнимая часть: {1}\n", this.real, this.imagine);
         }
     }
 
