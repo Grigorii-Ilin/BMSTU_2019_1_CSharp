@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Set {
     public class MySet {
-        public List<int> UniqueValues { get; private set; }
-        //private List<int> uniqueValues;
+        private List<int> UniqueValues { get; set; }
 
         public MySet(int[] values) {
+            UniqueValues = new List<int>();
+
             foreach (var value in values) {
                 if (!UniqueValues.Contains(value)) {
                     UniqueValues.Add(value);
@@ -15,7 +17,9 @@ namespace Set {
             }
         }
 
-        public MySet() { }
+        public MySet() {
+            UniqueValues = new List<int>();
+        }
 
         public int GetCardinality() {
             return UniqueValues.Count;
@@ -76,9 +80,29 @@ namespace Set {
                 return false;
             }
 
+
+            //todo sort lhs, rhs + for 
             foreach (var lValue in lhs.UniqueValues) {
                 foreach (var rValue in rhs.UniqueValues) {
-                    if (lValue != rValue) {
+                    bool flag = false;
+                    if (lValue == rValue) {
+                        flag =true;
+                        break;
+                    }
+                    if (!flag) {
+                        return false;
+                    }
+                }
+            }
+
+            foreach (var rValue in rhs.UniqueValues) {
+                foreach (var lValue in lhs.UniqueValues) {
+                    bool flag = false;
+                    if (lValue == rValue) {
+                        flag = true;
+                        break;
+                    }
+                    if (!flag) {
                         return false;
                     }
                 }
@@ -89,6 +113,15 @@ namespace Set {
 
         public static bool operator !=(MySet lhs, MySet rhs) {
             return !(lhs == rhs);
+        }
+
+        public override string ToString() {
+            string s="";
+            foreach (var value in UniqueValues) {
+                s += value.ToString() + " ";
+            }
+
+            return s;
         }
     }
 }
