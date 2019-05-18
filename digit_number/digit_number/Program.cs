@@ -9,13 +9,41 @@ namespace digit_number {
             var b = new ComplexDigit(7.5, 1.15);
 
             var c = a + b;
-            Console.WriteLine(a.str() + " + " + b.str() + " = " + c.str());
+            Console.WriteLine(a.ToString() 
+                                + " + " 
+                                + b.ToString() 
+                                + " = " 
+                                + c.ToString()
+                              );
 
             var d = a - b * c;
-            Console.WriteLine(a.str() + " - " + b.str() + " * " + c.str() + " = " + d.str());
+            Console.WriteLine(a.ToString() 
+                                + " - " 
+                                + b.ToString() 
+                                + " * " 
+                                + c.ToString() 
+                                + " = " 
+                                + d.ToString()
+                              );
 
             var e = (d - b) / a;
-            Console.WriteLine("("+d.str() + " - " + b.str() + ") / " + a.str() + " = " + e.str());
+            Console.WriteLine("("
+                                +d.ToString() 
+                                + " - " 
+                                + b.ToString() 
+                                + ") / " 
+                                + a.ToString() 
+                                + " = " 
+                                + e.ToString()
+                              );
+
+            bool isEqual = a == b;
+            Console.WriteLine(a.ToString()
+                    + " == "
+                    + b.ToString()
+                    + " = "
+                    + isEqual.ToString()
+                  );
 
             Console.ReadLine();
         }

@@ -41,17 +41,17 @@ namespace digit_number {
         }
 
         public static bool operator ==(ComplexDigit lhs, ComplexDigit rhs) {
-            bool br = lhs.real == rhs.real;
-            bool bim = lhs.imagine == rhs.imagine;
+            bool isSameReal = lhs.real == rhs.real;
+            bool isSameImagine = lhs.imagine == rhs.imagine;
 
-            return (br == true && bim == true);
+            return (isSameReal == true && isSameImagine == true);
         }
 
         public static bool operator !=(ComplexDigit lhs, ComplexDigit rhs) {
             return !(lhs == rhs);
         }
 
-        public string str() {
+        public override string ToString() {
             return String.Format("Целая часть: {0} Мнимая часть: {1}\n", this.real, this.imagine);
         }
     }
