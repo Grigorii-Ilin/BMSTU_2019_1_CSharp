@@ -15,11 +15,34 @@ namespace file_events {
             InitializeComponent();
         }
 
+        private List<MyFileSystemWatcher> myFileSystemWatchers;
+
         private void button1_Click(object sender, EventArgs e) {
-            if (folderBrowserDialog1.ShowDialog()==DialogResult.OK) {
-                MessageBox.Show(folderBrowserDialog1.SelectedPath);
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK) {
+                //MessageBox.Show(folderBrowserDialog1.SelectedPath);
+                myFileSystemWatchers.Add(
+                    new MyFileSystemWatcher(folderBrowserDialog.SelectedPath)
+                    );
+
+                //cmbFolders.Items.Add(folderBrowserDialog.SelectedPath);
+                //cmbFolders.Invalidate();
+
+                //cmbFolders.CreateControl();
             }
-            //FileSystemWatcher;
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+            myFileSystemWatchers = new List<MyFileSystemWatcher>();
+
+
+            this.Controls.Add(cmbFolders);
+            //cmbFolders.DataSource = null;
+            cmbFolders.DataSource = myFileSystemWatchers;
+            cmbFolders.DisplayMember = "WatchingPath";
+            //cmbFolders.ValueMember = "Uid";
+            
+            
         }
     }
 }
