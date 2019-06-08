@@ -24,7 +24,7 @@ namespace file_events {
                     new MyFileSystemWatcher(folderBrowserDialog.SelectedPath)
                     );
 
-                //cmbFolders.Items.Add(folderBrowserDialog.SelectedPath);
+                cmbFolders.Items.Add(folderBrowserDialog.SelectedPath);
                 //cmbFolders.Invalidate();
 
                 //cmbFolders.CreateControl();
@@ -36,10 +36,10 @@ namespace file_events {
             myFileSystemWatchers = new List<MyFileSystemWatcher>();
 
 
-            this.Controls.Add(cmbFolders);
+            //this.Controls.Add(cmbFolders);
             //cmbFolders.DataSource = null;
-            cmbFolders.DataSource = myFileSystemWatchers;
-            cmbFolders.DisplayMember = "WatchingPath";
+            //cmbFolders.DataSource = myFileSystemWatchers;
+            //cmbFolders.DisplayMember = "WatchingPath";
             //cmbFolders.ValueMember = "Uid";
             
             
