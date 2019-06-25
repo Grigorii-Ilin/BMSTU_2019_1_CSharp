@@ -6,73 +6,70 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace file_events {
-    public delegate void  ChangedContainer();
-
+    public delegate void ChangedContainer(DateTime changedDT, FileHistory fileHistory);
 
     class MyFileSystemWatcher {
-        Dictionary<string, DateTime> filenamesWithDates;
-        public int SubscribersCount { get; set; } = 0;
+        public int SubscribersCount { get; private set; } = 0;
 
-        public string WatchingPath { get; private set; }
-        //public Guid Uid { get; private set; }
+        public readonly string WatchingPath;
+        private List<FileHistory> pathHistoryList;
 
         public MyFileSystemWatcher(string path) {
-            filenamesWithDates = new Dictionary<string, DateTime>();
-
-            WatchingPath = path;
-            //this.Uid = Guid.NewGuid();
+            this.WatchingPath = path;
+            this.pathHistoryList = new List<FileHistory>();
         }
 
-        //public event ChangedContainer FileCreated;
-        //public event ChangedContainer FileUpdated;
-        //public event ChangedContainer FileDeleted;
-        public event ChangedContainer Changed;
+        public event ChangedContainer Changed 
+            {
+            add 
+                {
+                changed += value;
+                SubscribersCount++;
+            }
+            remove {
+                changed -= value;
+                SubscribersCount--;
+            }
+        }
+        private ChangedContainer changed;
 
         public  void CheckPath() {
-            //string[] filenames = Directory.GetFiles(WatchingPath);
+            var now = DateTime.Now;
+            FileInfo[] fileInfoArray= new DirectoryInfo(WatchingPath).GetFiles();
 
-            //foreach (var filename in filenames) {
-            //    if (!filenamesWithDates.ContainsKey(filename)) {
-            //        filenamesWithDates[filename] = DateTime.Now;
+            var pathFileNames = fileInfoArray.Select(f => f.Name).ToArray();
+            var historyFileNames= pathHistoryList.Select(f=>f.fileName).ToArray();
 
-            //        FileCreated();
-            //    }
-            //}
-            FileInfo[] fiArr= new DirectoryInfo(WatchingPath).GetFiles();
+            var fileNamesForAdd = pathFileNames.Except(historyFileNames);
+            foreach (var fnForAdd in fileNamesForAdd) {
+                var fileHistory = new FileHistory(fnForAdd);
+                fileHistory.AddChange(now, FileChangeTypes.created);
+                changed?.Invoke(now, fileHistory);
+                pathHistoryList.Add(fileHistory);
+            }
 
-            foreach (var fi in fiArr) {
-                if (!filenamesWithDates.ContainsKey(fi.Name)) {
-                    filenamesWithDates[fi.Name] = fi.LastWriteTime;
 
-                    FileCreated();
+            foreach (var fileInfo in fileInfoArray) {
+                foreach (var fileHistory in pathHistoryList) {
+                    if ((fileInfo.Name == fileHistory.fileName)
+                    && (fileInfo.LastWriteTime > fileHistory.GetLastChangeTime())) {
+                        fileHistory.AddChange(now, FileChangeTypes.updated);
+                        changed?.Invoke(now, fileHistory);
+                    }
                 }
             }
 
-            foreach (var fi in fiArr) {
-                if (filenamesWithDates.ContainsKey(fi.Name) 
-                && filenamesWithDates[fi.Name] != fi.LastWriteTime) {
-                    filenamesWithDates[fi.Name] = fi.LastWriteTime;
+            var fileNamesForDel = historyFileNames.Except(pathFileNames);
 
-                    FileUpdated();
+            foreach (var fnForDel in fileNamesForDel) {
+                foreach (var fileHistory in pathHistoryList) {
+                    if ((fileHistory.fileName== fnForDel)
+                    &&(fileHistory.GetLastChangeType()!=FileChangeTypes.deleted)) {
+                        fileHistory.AddChange(now, FileChangeTypes.deleted);
+                        changed(now, fileHistory);
+
+                    }
                 }
-            }
-
-            //var keysTmp = new List<string>();
-            //foreach (var k in filenamesWithDates.Keys) {
-            //    if (!fiArr.Any(fi=>fi.Name==k)){
-            //        keysTmp.app
-            //    }
-            //}
-
-            var keys = filenamesWithDates.Keys.ToArray();
-            //var fileNames = fiArr.SelectMany(fi => fi.Name).ToArray(); 
-            var fileNames = fiArr.Select(fi => fi.Name).ToArray();
-            var keysForDelete = keys.Except(fileNames);
-
-            foreach (var k in keysForDelete) {
-                filenamesWithDates.Remove(k);
-
-                FileDeleted();
             }
 
         }

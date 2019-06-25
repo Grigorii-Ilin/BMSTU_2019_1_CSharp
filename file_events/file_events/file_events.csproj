@@ -54,7 +54,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="MyFileSystemWatcher.cs" />
-    <Compile Include="PathHistory.cs" />
+    <Compile Include="FileHistory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subscriber.cs" />

@@ -16,33 +16,43 @@ namespace file_events {
         }
 
         private List<MyFileSystemWatcher> myFileSystemWatchers;
+        //private List<Subscriber> subscribers;
+        private Subscriber subscriber;
 
         private void button1_Click(object sender, EventArgs e) {
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK) {
-                //MessageBox.Show(folderBrowserDialog1.SelectedPath);
                 myFileSystemWatchers.Add(
                     new MyFileSystemWatcher(folderBrowserDialog.SelectedPath)
                     );
 
                 cmbFolders.Items.Add(folderBrowserDialog.SelectedPath);
-                //cmbFolders.Invalidate();
-
-                //cmbFolders.CreateControl();
             }
-
         }
 
         private void Form1_Load(object sender, EventArgs e) {
             myFileSystemWatchers = new List<MyFileSystemWatcher>();
+            //subscribers = new List<Subscriber>();
+            subscriber= new Subscriber();
+        }
 
+        private void timer_Tick(object sender, EventArgs e) {
+            foreach (var watcher in myFileSystemWatchers) {
+                if (watcher.SubscribersCount>=1) {
+                    watcher.CheckPath();
+                }
+            }
+        }
 
-            //this.Controls.Add(cmbFolders);
-            //cmbFolders.DataSource = null;
-            //cmbFolders.DataSource = myFileSystemWatchers;
-            //cmbFolders.DisplayMember = "WatchingPath";
-            //cmbFolders.ValueMember = "Uid";
-            
-            
+        private void btnAddSubscriber_Click(object sender, EventArgs e) {
+            string selectedPathName = cmbFolders.GetItemText(cmbFolders.SelectedItem);
+            MyFileSystemWatcher watcher = myFileSystemWatchers.First(w => w.WatchingPath == selectedPathName);
+            watcher.Changed += subscriber.Message;
+        }
+
+        private void btnDelSubscriber_Click(object sender, EventArgs e) {
+            string selectedPathName = cmbFolders.GetItemText(cmbFolders.SelectedItem);
+            MyFileSystemWatcher watcher = myFileSystemWatchers.First(w => w.WatchingPath == selectedPathName);
+            watcher.Changed -= subscriber.Message;
         }
     }
 }

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace file_events {
-    class Subscriber {
+    public class Subscriber {
 
-        public void Message() {
-            MessageBox.Show("Подписчик получил сообщение");
+        public void Message(DateTime changedDT, FileHistory fileHistory) {
+            MessageBox.Show(fileHistory.fileName);
         }
     }
 }
