@@ -5,7 +5,7 @@ namespace async_task_manager {
         static void Main(string[] args) {
             Console.WriteLine("Запуск задачи в текущем потоке:\n");
             var syncronousTask = new AsyncTask();
-            double discriminant = syncronousTask.GetDiskriminantAsync();
+            double discriminant = syncronousTask.GetDiskriminant();
             Console.WriteLine($"Дискриминант: {discriminant}\n");
 
             while (true) {
