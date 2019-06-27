@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace async_task_manager {
-    public class MyAsyncTaskManager {
-        private ConcurrentQueue<MyAsyncTask> concurrentQueue;
+    public class AsyncTaskManager {
+        private ConcurrentQueue<AsyncTask> concurrentQueue;
 
-        public MyAsyncTaskManager(int concurrencyLevel) {
+        public AsyncTaskManager(int concurrencyLevel) {
 
         }
 
-        public void EnqueTask(MyAsyncTask task) {
+        public void EnqueTask(AsyncTask task) {
 
         }
 
